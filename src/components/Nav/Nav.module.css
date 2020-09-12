@@ -1,0 +1,20 @@
+.nav {
+    grid-area: n;
+    background-color: 	#f7f7f7
+}
+.nav ul {
+    list-style-type: none;
+}
+
+.item {
+    padding: 5px;
+}
+.item a {
+    color: #a19d9d;
+    text-decoration: none;
+
+}
+
+.item a.active {
+    color: 	#3b5998;
+}

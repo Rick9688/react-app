@@ -1,0 +1,17 @@
+.friends_panel {
+    margin: 25px;
+    margin-top: 50px;
+}
+
+.title {
+    padding: 20px;
+}
+
+.item {
+display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.img {
+    width: 50px;
+}
