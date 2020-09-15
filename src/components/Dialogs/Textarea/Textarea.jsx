@@ -2,16 +2,22 @@ import React from 'react';
 import classes from './Textarea'
 
 
-const newPostElement = React.createRef();
-const sendMessage = () => {
-    let message = newPostElement.current.value;
-    alert(message)
-}
+
+
 
 const Textarea = (props) => {
+    const newMessageElement = React.createRef();
+    const sendMessage = () => {
+        props.sendMessage()
+    };
+
+    const onMessageChange = () => {
+        let text = newMessageElement.current.value;
+        props.updateNewMessageText(text)
+    };
     return (
         <div className={classes.textarea}>
-            <div><textarea ref={newPostElement}></textarea></div>
+            <div><textarea ref={newMessageElement} onChange={onMessageChange} value={props.newMessageText}></textarea></div>
             <div>
                 <button onClick={sendMessage}>Send</button>
             </div>
