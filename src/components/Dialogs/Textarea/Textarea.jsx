@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Textarea'
+import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/state";
 
 
 
@@ -8,16 +9,18 @@ import classes from './Textarea'
 const Textarea = (props) => {
     const newMessageElement = React.createRef();
     const sendMessage = () => {
-        props.sendMessage()
+        let action = sendMessageActionCreator()
+        props.dispatch(action)
     };
 
     const onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.updateNewMessageText(text)
+        let action = updateNewMessageTextActionCreator(text)
+        props.dispatch(action)
     };
     return (
         <div className={classes.textarea}>
-            <div><textarea ref={newMessageElement} onChange={onMessageChange} value={props.newMessageText}></textarea></div>
+            <div><textarea placeholder={'Enter message'} ref={newMessageElement} onChange={onMessageChange} value={props.newMessageText}></textarea></div>
             <div>
                 <button onClick={sendMessage}>Send</button>
             </div>
