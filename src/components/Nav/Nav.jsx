@@ -22,9 +22,7 @@ const Nav = (props) => {
                     <NavLink to="/news" activeClassName ={classes.active}>News</NavLink>
                 </li>
             </ul>
-            <div>
-                <MyFriends state={props.state} />
-            </div>
+
         </nav>
     )
 }

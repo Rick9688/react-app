@@ -1,43 +1,27 @@
 import React from 'react';
-import classes from './MyPosts.module.css';
-import Post from './Post/Post';
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";MyPosts.jsx
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
 
 
-
-
-
-const MyPosts = (props) => {
-    let postsElements = props.posts.map(post => <Post id = {post.id} message = {post.message} likesCount = {post.likesCounter}/>)
-
-    let newPostElement = React.createRef()
-
-    const addPost = () => {
-        let action = addPostActionCreator()
-        props.dispath(action);
-    };
-
-    const onPostChange = () => {
-        let text = newPostElement.current.value;
-        let action = updateNewPostTextActionCreator(text)
-        props.dispath(action)
+const mapStateToProps = (state) => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
     }
-    return (
-
-        <div className={classes.post_block}>
-            <h3>My posts</h3>
-            <div>
-                <div><textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea></div>
-                <div>
-                    <button onClick={addPost}>Add new post</button>
-                </div>
-            </div>
-            <div className={classes.posts}>
-                {postsElements}
-            </div>
-        </div>
-
-    )
 }
 
-export default MyPosts;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => {
+            dispatch(addPostActionCreator())
+        },
+        updateNewPostText: (text) => {
+            dispatch(updateNewPostTextActionCreator(text))
+        }
+    }
+}
+
+const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts)
+
+export default MyPostsContainer;
