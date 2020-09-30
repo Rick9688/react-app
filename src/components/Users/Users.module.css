@@ -1,0 +1,44 @@
+.users {
+
+}
+
+.title {
+
+}
+
+.usersWrapper {
+    display: flex;
+    width: 100%;
+
+
+}
+
+.showMoreBtn {
+
+}
+
+.info {
+display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+.avatar_followBtn_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar {
+    width: 100px;
+}
+.name_status_wrapper {
+
+}
+
+.country_city_wrapper {
+
+}
+
+.selectedPage {
+    font-weight: bold;
+}
