@@ -1,8 +1,16 @@
 
 .main_img {
     width: 100%;
+    height: 150px;
 }
 .avatar_description {
+    display: flex;
+}
+
+.info {
     padding: 10px;
 }
 
+.name {
+    margin: 0;
+}

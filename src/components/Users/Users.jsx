@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './Users.module.css'
 import userPhoto from "../../assets/images/userPhoto.png";
+import {NavLink} from "react-router-dom";
 
 const Users =(props) => {
 
@@ -30,7 +31,9 @@ return (
                 </div>
                 <div className={classes.info}>
                     <div className={classes.name_status_wrapper}>
-                        <h2>{u.name}</h2>
+                        <NavLink to={`/Profile/${u.id}`}>
+                            <h2>{u.name}</h2>
+                        </NavLink>
                         <p>{u.status}</p>
                     </div>
                     <div className={classes.country_city_wrapper}>

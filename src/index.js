@@ -15,5 +15,7 @@ import {BrowserRouter} from "react-router-dom";
         document.getElementById('root')
     );
 
+    window.store = store
+
 
 

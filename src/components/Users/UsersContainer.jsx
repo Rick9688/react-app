@@ -1,19 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow
 } from "../../redux/usersReducer";
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
 
 
-class UsersApiComponent extends React.Component{
+class UsersApiComponent extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -63,7 +63,7 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
             dispatch(followAC(userId));
@@ -84,9 +84,11 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
+}*/
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps) (UsersApiComponent);
+const UsersContainer = connect(mapStateToProps, {
+    follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching
+}) (UsersApiComponent);
 
 
 
