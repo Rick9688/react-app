@@ -2,19 +2,20 @@ import React from 'react';
 import classes from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-
-
-
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator} from "../../utils/validators/validators";
+import {TextArea} from "../../FormControls/FormControls";
 const Dialogs = (props) => {
-    const onMessageChange = (e) => {
-        let body = e.target.value;
-        props.onMessageChange(body)
+
+    const sendMessage = (values) => {
+        props.sendMessage(values.newMessageText);
     };
-    const sendMessage = () => {
-      props.sendMessage();
-    };
-    const dialogsElements = props.messagePage.dialogData.map(dialog => <DialogItem name = {dialog.name} id = {dialog.id} url = {dialog.pic} />)
-    const messagesElements = props.messagePage.messageData.map(message => <Message message = {message.message} id = {message.id}/>)
+
+
+    const dialogsElements = props.messagePage.dialogData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}
+                                                                                   url={dialog.pic}/>)
+    const messagesElements = props.messagePage.messageData.map(message => <Message message={message.message}
+                                                                                   id={message.id}/>)
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogs_items}>
@@ -22,21 +23,27 @@ const Dialogs = (props) => {
             </div>
             <div className={classes.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div>
-                        <textarea placeholder='Enter message'
-                                   onChange={onMessageChange}
-                                   value={props.messagePage.newMessageText}>
-
-                        </textarea>
-                    </div>
-                    <div>
-                        <button onClick={sendMessage}>Send</button>
-                    </div>
-                </div>
+               <SendNewMessageReduxForm onSubmit={sendMessage}/>
             </div>
         </div>
     )
 }
+const maxLength50 = maxLengthCreator(50)
+const SendNewMessageForm = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field placeholder='Enter message' component={TextArea} name={'newMessageText'} validate={maxLength50}/>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+
+    )
+}
+
+const SendNewMessageReduxForm = reduxForm({
+    form: 'SendNewMessageForm'
+})(SendNewMessageForm)
 
 export default Dialogs;

@@ -4,7 +4,6 @@ import dialogReducer from "./dialogReducer";
 
 const store = {
     _callSubscriber() {
-        console.log('state chanched')
     },
 
     _state: {
@@ -55,8 +54,6 @@ const store = {
     }
 };
 
-export const addPostActionCreator = () =>({type: 'ADD-POST'})
-export const updateNewPostTextActionCreator = (text) => ({type: 'UPDATE-POST-TEXT',postText: text})
-export const sendMessageActionCreator = () =>({type: 'SEND-MESSAGE'})
-export const updateNewMessageTextActionCreator = (text) => ({type: 'UPDATE-MESSAGE-TEXT',messageText: text})
+
+
 export default store

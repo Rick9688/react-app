@@ -4,15 +4,15 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import classes from "./ProfileInfo/ProfileInfo.module.css";
 
 
-
 const Profile = (props) => {
     return (
         <div>
-            <img className = {classes.main_img} src="http://www.imageonemri.ca/image/w2000-c5:2/files/58532088_l.jpg"></img>
-            <ProfileInfo profile={props.profile} />
-             <MyPostsContainer/>
+            <img className={classes.main_img}
+                 src="http://www.imageonemri.ca/image/w2000-c5:2/files/58532088_l.jpg"></img>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <MyPostsContainer/>
         </div>
-      
+
     )
 }
 

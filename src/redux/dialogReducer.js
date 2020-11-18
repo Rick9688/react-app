@@ -1,5 +1,4 @@
-const update_message_text = 'UPDATE-MESSAGE-TEXT';
-const send_message = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 const initialState = {
     dialogData : [
         {id: '1', name: 'Andrew', pic: 'https://previews.123rf.com/images/triken/triken1608/triken160800029/61320775-male-avatar-profile-picture-default-user-avatar-guest-avatar-simply-human-head-vector-illustration-i.jpg'},
@@ -18,10 +17,10 @@ const initialState = {
     newMessageText: ''}
 const dialogReducer = (state = initialState,action) => {
     switch(action.type) {
-        case send_message: {
+        case SEND_MESSAGE: {
             let newMessage = {
                 id: '6',
-                message: state.newMessageText
+                message: action.newMessageText
             };
             let stateCopy = {...state};
             stateCopy.messageData = [...stateCopy.messageData]
@@ -29,14 +28,11 @@ const dialogReducer = (state = initialState,action) => {
             stateCopy.newMessageText = '';
             return stateCopy;
         }
-        case update_message_text: {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.messageText;
-            return stateCopy;
-        }
+
         default:
             return state;
     }
 }
 
+export const sendMessageActionCreator = (newMessageText) =>({type: 'SEND_MESSAGE',newMessageText})
 export default dialogReducer

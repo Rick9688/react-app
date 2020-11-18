@@ -17,11 +17,15 @@
 
 }
 
+.btn {
+    width: 10em;
+}
+
 .info {
 display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
 }
 .avatar_followBtn_wrapper {
     display: flex;
@@ -39,6 +43,3 @@ display: flex;
 
 }
 
-.selectedPage {
-    font-weight: bold;
-}

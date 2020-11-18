@@ -1,46 +1,73 @@
-const update_post_text = 'UPDATE-POST-TEXT';
-const add_message = 'ADD-POST';
+import {profileAPI, usersAPI} from "../api/api";
+
+const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 const initialState = {
-    posts : [
+    posts: [
         {id: '1', message: 'Hi', likesCounter: '15'},
         {id: '2', message: 'It\'s my first post', likesCounter: '25'},
-        {id: '3', message: 'Огогогого', likesCounter: '18'},
-        {id: '4', message: 'Ну шо ты, голова?', likesCounter: '29'},
+        {id: '3', message: 'That`s cool!', likesCounter: '18'},
+        {id: '4', message: 'Oh it`s amazing', likesCounter: '29'},
     ],
-    newPostText: '',
-    profile: null}
+    profile: null,
+    status: ''
+}
 
 
-const profileReducer = (state = initialState,action) => {
-    switch(action.type) {
-        case add_message: {
+const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ADD_POST: {
             let newPost = {
                 id: '5',
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCounter: '0'
             };
-            let newState = {...state};
-            newState.posts = [...state.posts]
-            newState.posts.push(newPost)
-            newState.newPostText = '';
-            return newState;
+          return {
+              ...state,
+              posts: [...state.posts, newPost],
+
+          }
         }
-        case update_post_text: {
-            let newState = {...state}
-            newState.newPostText = action.postText;
-            return newState;
-        }
+
         case SET_USER_PROFILE:
             return {
-        ...state,
+                ...state,
                 profile: action.profile
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case DELETE_POST:
+            return {
+                ...state, posts: state.posts.filter(p => p.id != action.id)
             }
         default:
             return state;
     }
 };
 
-export const setUserProfile = (profile) =>({type:SET_USER_PROFILE, profile})
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const setStatus = (status) => ({type: SET_STATUS, status})
 
+export const getUserProfile = (userId) => async (dispatch) => {
+    let response = await usersAPI.getProfile(userId)
+            dispatch(setUserProfile(response.data))
+}
+
+export const getStatus = (userId) => async (dispatch) => {
+   let response = await profileAPI.getStatus(userId)
+            dispatch(setStatus(response.data))
+}
+export const updateStatus = (status) => async (dispatch) => {
+    let response  = await profileAPI.updateStatus(status)
+            if(response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+}
+export const addPostActionCreator = (newPostText) =>({type: ADD_POST, newPostText})
+export const deletePost = (id) => ({type: DELETE_POST, id})
 export default profileReducer;
