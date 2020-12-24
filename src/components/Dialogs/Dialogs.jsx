@@ -12,9 +12,9 @@ const Dialogs = (props) => {
     };
 
 
-    const dialogsElements = props.messagePage.dialogData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}
+    const dialogsElements = props.messagePage.dialogData.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id}
                                                                                    url={dialog.pic}/>)
-    const messagesElements = props.messagePage.messageData.map(message => <Message message={message.message}
+    const messagesElements = props.messagePage.messageData.map(message => <Message key={message.id} message={message.message}
                                                                                    id={message.id}/>)
     return (
         <div className={classes.dialogs}>

@@ -7,7 +7,7 @@ const User = ({user,isFollowingInProgress,unfollow,follow}) => {
     return (
         <div>
             <div className={classes.avatar_followBtn_wrapper}>
-                <img src={user.photos.small != null ? user.photos.small : userPhoto} className={classes.avatar}/>
+                <img src={user.photos.small != null ? user.photos.small : userPhoto} alt={'avatar'} className={classes.avatar}/>
                 {user.followed
                     ? <button className={classes.btn} disabled={isFollowingInProgress.some(id => id === user.id)} onClick={() => {
 

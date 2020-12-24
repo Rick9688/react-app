@@ -21,7 +21,6 @@ const Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ..
                     )
                 }
             </div>
-            <button className={classes.showMoreBtn}>Show more</button>
         </div>)
 }
 

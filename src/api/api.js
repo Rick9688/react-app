@@ -9,7 +9,7 @@ const instance = axios.create({
     }
 )
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 3) {
+    getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(
                 response => {
@@ -64,7 +64,18 @@ export const profileAPI = {
 
     updateStatus(status) {
         return instance.put('profile/status',{status: status})
+    },
+
+    savePhoto(file) {
+        const formData = new FormData();
+        formData.append("image", file)
+        return instance.put('profile/photo',formData, {
+            headers: {
+                "Content-Type": 'multipart/form-data'
+            }
+        })
     }
+
 }
 
 

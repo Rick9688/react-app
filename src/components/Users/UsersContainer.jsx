@@ -22,13 +22,13 @@ import {
 
 class UsersApiComponent extends React.Component {
     componentDidMount() {
-        const {currentPage, pageSize} = this.props
-        this.props.getUsers(currentPage, pageSize)
+        const {currentPage, pageSize} = this.props;
+        this.props.getUsers(currentPage, pageSize);
     }
     onPageChanged = (pageNumber) => {
         const{pageSize} = this.props;
-        this.props.getUsers(pageNumber, pageSize)
-        this.props.setCurrentPage(pageNumber)
+        this.props.getUsers(pageNumber, pageSize);
+        this.props.setCurrentPage(pageNumber);
 
     }
     render() {
