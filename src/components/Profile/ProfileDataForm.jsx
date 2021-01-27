@@ -15,7 +15,6 @@ const ProfileDataForm = ({handleSubmit}) => {
         <div>
             <b>My professional skills</b> : {createField('My professional skills', 'LookingForAJobDescription',[], TextArea)}
         </div>
-        }
     </form>
 }
 const  ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm);
