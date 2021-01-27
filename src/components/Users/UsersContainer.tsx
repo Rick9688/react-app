@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow, requestUsers,
-    setCurrentPage,
-    setTotalUsersCount,
     setUsers, toggleFollowingProgress,
     toggleIsFetching,
     unfollow
@@ -18,17 +16,33 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/users-selectors";
+import {UserType} from "../../Types/Types";
+import {AppStateType} from "../../redux/redux-store";
 
+type MapStateType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    users: Array<UserType>
+    isFollowingInProgress: Array<number>
+    isFetching: boolean
+}
 
-class UsersApiComponent extends React.Component {
+type MapDispatchType = {
+    getUsers: (currentPage: number, pageSize: number) => void
+    unfollow: (id: number) => void
+    follow: (id: number) => void
+}
+type PropsType = MapDispatchType & MapStateType
+
+class UsersApiComponent extends React.Component<PropsType> {
     componentDidMount() {
         const {currentPage, pageSize} = this.props;
         this.props.getUsers(currentPage, pageSize);
     }
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         const{pageSize} = this.props;
         this.props.getUsers(pageNumber, pageSize);
-        this.props.setCurrentPage(pageNumber);
 
     }
     render() {
@@ -53,7 +67,7 @@ class UsersApiComponent extends React.Component {
 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStateType  => {
     return {
         users: getUsers(state),
         currentPage: getCurrentPage(state),
@@ -66,9 +80,7 @@ let mapStateToProps = (state) => {
 
 
 
-
 export default compose(
     connect(mapStateToProps, {
-    follow,unfollow,setUsers,setCurrentPage,
-    setTotalUsersCount, getUsers: requestUsers, toggleIsFetching,toggleFollowingProgress
+    follow,unfollow,setUsers, getUsers: requestUsers, toggleIsFetching,toggleFollowingProgress
 }))(UsersApiComponent);
